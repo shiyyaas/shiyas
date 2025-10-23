@@ -39,8 +39,8 @@ shiyas = (
 
 #Ai (Connecting to the model)
 client = OpenAI(
-    base_url="https://router.huggingface.co/v1",
-    api_key=os.environ["HF_TOKEN"],
+    base_url="https://api.groq.com/openai/v1",
+    api_key=os.environ["GROQ_API_KEY"],
 )
 
 #page UI
@@ -76,7 +76,7 @@ if prompt:
 
     #Getting responser from Ai
     stream = client.chat.completions.create(
-        model="llama-3.1-70b-versatile" ,
+        model="llama-3.1-8b-instant" ,
         messages=[
             {
             "role": "system",
