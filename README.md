@@ -1,116 +1,103 @@
-
 # 🤖 Shiyas - AITwin
 
-A small Streamlit app that lets you "chat" with Shiyas' AI Twin using the OpenAI-compatible client routed through Hugging Face's inference router. This README contains everything you need to run, secure, and develop the project.
+A small Streamlit app that lets you "chat" with Shiyas' AI Twin using the OpenAI-compatible client routed through Hugging Face's inference router.
 
 ---
 
-🎯 Quick summary
-- Tech: Python, Streamlit, OpenAI Python client (used with Hugging Face router)
-- Main file: `app.py`
-- Run: `streamlit run app.py`
-- Secrets: HF token read from `.env` (variable: `HF_TOKEN`)
+## 🎯 Quick Summary
+
+* **Tech:** Python, Streamlit, OpenAI Python client (Hugging Face router)
+* **Main file:** `app.py`
+* **Run:** `streamlit run app.py`
+* **Secret:** HF token in `.env` file
 
 ---
 
-Demo Preview
-- Open a terminal and run:
-  - `streamlit run app.py`
-- Visit the local Streamlit URL printed in the terminal (usually http://localhost:8501).
+## 🚀 Setup
 
----
-
-Requirements ✅
-- Python 3.8+
-- The project currently depends on:
-  - streamlit
-  - python-dotenv
-  - openai
-- The repository contains `requirement.txt` (note the filename). You can use it as-is or create a pinned `requirements.txt` for reproducible installs.
-
-We recommend pinning versions for production. Example:
-```
-streamlit==1.25.0
-python-dotenv==1.0.0
-openai==1.0.0
+1. **Clone the repo:**
+```bash
+   git clone https://github.com/shiyyaas/shiyas-AITwin.git
+   cd shiyas-AITwin
 ```
 
----
+2. **Create virtual environment:**
+```bash
+   python -m venv .venv
+   source .venv/bin/activate  # macOS/Linux
+   # .venv\Scripts\Activate.ps1  # Windows
+```
 
-Setup — Local (fastest)
-1. Clone the repo:
-   - git clone https://github.com/shiyyaas/shiyas-AITwin.git
-   - cd shiyas-AITwin
+3. **Install dependencies:**
+```bash
+   pip install -r requirement.txt
+```
 
-2. Create & activate a virtual environment:
-   - python -m venv .venv
-   - macOS / Linux: `source .venv/bin/activate`
-   - Windows (PowerShell): `.venv\Scripts\Activate.ps1`
-
-3. Install dependencies:
-   - pip install -r requirement.txt
-   (or rename `requirement.txt` → `requirements.txt` and run `pip install -r requirements.txt`)
-
-4. Create environment variables:
-   - Copy the example (below) into `.env` at repo root (do NOT commit `.env`):
-     ```
+4. **Add your Hugging Face token:**
+   * Create a `.env` file in the repo root:
+```
      HF_TOKEN=your_huggingface_token_here
-     ```
-   - Alternatively export env var:
-     - macOS / Linux: `export HF_TOKEN="your_token"`
-     - Windows (cmd): `set HF_TOKEN=your_token`
-
-5. Start the app:
-   - streamlit run app.py
-
----
-
-.env.example
 ```
-# Copy to .env (DO NOT commit .env)
-HF_TOKEN=
+   * **Important:** Never commit `.env` to GitHub!
+
+5. **Run the app:**
+```bash
+   streamlit run app.py
 ```
-
-Important: Do NOT commit your real tokens to the repository. If you have already pushed a token, see the Security section below.
-
----
-
-What app.py does (short)
-- Loads environment variables via python-dotenv.
-- Configures Streamlit page.
-- Instantiates OpenAI client:
-  - base_url is set to Hugging Face router: `https://router.huggingface.co/v1`
-  - API key is read from `HF_TOKEN`
-- Presents a simple chat UI using Streamlit's chat helpers and streams model responses.
-- Uses `client.chat.completions.create(..., stream=True)` and `st.write_stream(stream)` to show streaming responses.
+   Visit `http://localhost:8501` in your browser.
 
 ---
 
-Files in repo
-- app.py
-- LICENSE (MIT)
-- .gitignore
-- requirement.txt
+## 🎭 About This AI Twin
+
+This is an AI clone of me (Shiyas PS). Everyone has different perspectives about who I am, and all viewpoints are valuable.
+
+**Current personality:**
+> Your name is Shiyas PS. You're a self-confident person, you are kind. You're a BCA student. You are very serious person, You're not being silly.
+
+### Help Shape My Personality 🤝
+
+Know me personally? Think something's missing or inaccurate? Your contributions are welcome!
+
+**How to contribute:**
+
+1. **Open an issue** - Describe what should change about the personality and why
+2. **Submit a PR** - Update the system prompt in `app.py` with improved personality traits
+3. **Provide examples** - Show how I actually communicate or respond to situations
+
+**Guidelines:**
+
+* Don't remove existing traits without opening an issue first - let's discuss it
+* Explain your reasoning clearly
+* Real examples are helpful for context
+
+Your contributions help make this AI twin more accurate. Thank you! 🎯
 
 ---
 
-Development & Contribution 🤝
-- Fork the repo, create a feature branch (`feat/xxx`), and open a PR.
-- Keep PRs small and focused.
-- Add tests for new logic if applicable.
-- Follow simple style rules (black/isort) for Python formatting.
+## 🛠️ Development & Contribution
+
+Contributions to improve the project are welcome.
+
+* Fork the repo, create a feature branch, and open a PR
+* Keep PRs focused and small
+* Follow Python best practices (black/isort formatting)
 
 ---
 
-License
-- This project is licensed under the MIT License. See `LICENSE` for details.
+## 📄 License
+
+MIT License - See [LICENSE](LICENSE) for details.
 
 ---
 
-Contact & Credits
-- Author: shiyas ps (as declared in LICENSE)
-- If you want help hardening the app (removing secrets from history, adding CI or Docker, or improving the chat UX), Contact me we can disscuss.
+## 📞 Contact
+
+**Author:** Shiyas PS  
+**Live Demo:** [shiyasaitwin.streamlit.app](https://shiyasaitwin.streamlit.app)
+
+Questions or suggestions? Feel free to reach out!
 
 ---
 
-Thank you! 🚀 Made with love
+Made with ❤️
