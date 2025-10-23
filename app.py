@@ -21,8 +21,14 @@ client = OpenAI(
 )
 
 #page UI
-st.title("Shiyas - AITwin")
-st.caption("Powered by groq • This is the twin of shiyas ps....")
+col1, col2 = st.columns([1, 4])
+
+with col1:
+    st.image("icon.png", width=120)
+
+with col2:
+    st.title("Shiyas - AITwin")
+    st.caption("Powered by groq • This is the twin of shiyas ps....")
 prompt = st.chat_input("Type something here....")
 
 # for message history
