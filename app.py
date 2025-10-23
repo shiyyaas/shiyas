@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 
 #load the .env secret apikeys
-# load_dotenv
+load_dotenv()
 
 #page informations
 st.set_page_config(
@@ -14,18 +14,50 @@ st.set_page_config(
     layout="centered"
 )
 
+#Ai (Connecting to the model)
+client = OpenAI(
+    base_url="https://router.huggingface.co/v1",
+    api_key=os.environ["HF_TOKEN"],
+)
+
 #page UI
 st.title("Shiyas - chatbot")
 st.caption("Powered by Qwen • Ask me anything....")
+prompt = st.chat_input("Type something here....")
 
+# for message history
+if "messages" not in  st.session_state:
+    st.session_state.messages = [
+        {"role":"assistant" , "content" : "Hey , How can I help you ? "}
+    ]
 
-with st.chat_message("user"):
-    st.write("Hello!")
-
-with st.chat_message("assistant"):
-    st.write("Hi there!")
-
-prompt = st.chat_input("Say something")
+# Display all messages pervious 
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.write(message["content"])
 
 if prompt:
-    st.write(f"You said: {prompt}")
+    st.session_state.messages.append({
+        "role" : "user",
+        "content" : prompt
+    })
+    #Getting responser from Ai
+    stream = client.chat.completions.create(
+        model="Qwen/Qwen2-1.5B-Instruct",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        stream=True,
+    )
+    #Saving to response to messages(history)
+    response = ""
+    for chunk in stream:
+        if chunk.choices[0].delta.content:
+            response += chunk.choices[0].delta.content
+    st.session_state.messages.append({
+        "role" : "user" ,
+        "content" : response
+    })
