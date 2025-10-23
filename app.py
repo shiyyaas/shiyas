@@ -76,7 +76,7 @@ if prompt:
 
     #Getting responser from Ai
     stream = client.chat.completions.create(
-        model="meta-llama/Meta-Llama-3.1-70B-Instruct",
+        model="llama-3.1-70b-versatile" ,
         messages=[
             {
             "role": "system",
