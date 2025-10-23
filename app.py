@@ -10,7 +10,7 @@ load_dotenv()
 #page informations
 st.set_page_config(
     page_icon="icon.png",
-    page_title="Chat with S-Bot",
+    page_title="Chat with shiyas twin",
     layout="centered"
 )
 
@@ -21,8 +21,8 @@ client = OpenAI(
 )
 
 #page UI
-st.title("Shiyas - chatbot")
-st.caption("Powered by Qwen • Ask me anything....")
+st.title("Shiyas - twin")
+st.caption("Powered by Qwen • This is the twin of shiyas ps....")
 prompt = st.chat_input("Type something here....")
 
 # for message history
@@ -41,24 +41,27 @@ if prompt:
         "role" : "user",
         "content" : prompt
     })
+    #displaying
+    with st.chat_message("user"):
+        st.write(prompt)
+
     #Getting responser from Ai
     stream = client.chat.completions.create(
         model="openai/gpt-oss-120b:groq",
-        instructions="Youre name is shiyas ps , youre a self confident person , you are kind , Youre a bca student",
         messages=[
             {
-                "role": "user",
-                "content": prompt
+            "role": "system",
+            "content": "Your name is Shiyas PS. You're a self-confident person, you are kind. You're a BCA student. You are very serious person , Youre not being silly"
             }
-        ],
+        ] + st.session_state.messages ,
         stream=True,
     )
-    #Saving to response to messages(history)
-    response = ""
-    for chunk in stream:
-        if chunk.choices[0].delta.content:
-            response += chunk.choices[0].delta.content
+    # Display streaming response in real-time
+    with st.chat_message("assistant"):
+        response = st.write_stream(stream)
+        
+    # Save to message history
     st.session_state.messages.append({
-        "role" : "user" ,
-        "content" : response
+        "role": "assistant",
+        "content": response
     })
