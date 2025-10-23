@@ -43,7 +43,8 @@ if prompt:
     })
     #Getting responser from Ai
     stream = client.chat.completions.create(
-        model="Qwen/Qwen2-1.5B-Instruct",
+        model="openai/gpt-oss-120b:groq",
+        instructions="Youre name is shiyas ps , youre a self confident person , you are kind , Youre a bca student",
         messages=[
             {
                 "role": "user",
