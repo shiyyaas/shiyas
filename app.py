@@ -76,7 +76,7 @@ if prompt:
 
     #Getting responser from Ai
     stream = client.chat.completions.create(
-        model="openai/gpt-oss-120b:groq",
+        model="meta-llama/Meta-Llama-3.1-70B-Instruct",
         messages=[
             {
             "role": "system",
